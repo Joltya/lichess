@@ -1,0 +1,106 @@
+/* ==UserStyle==
+@name           liFX - Squares (Work in Progress)
+@namespace      https://github.com/Joltya/
+@version        1.0.0
+@description    Custom effects for lichess.org
+@author         Kai Webb <cindykaiwebb@gmail.com>
+@homepageURL	https://github.com/Joltya/lichess/
+@supportURL		https://github.com/Joltya/lichess/liFX/issues/new/choose
+@updateURL		https://raw.githubusercontent.com/Joltya/lichess/master/liFX/lifx_squares_pluss.user.css
+@preprocessor	stylus
+@license		AGPL-3.0-only
+
+@preprocessor	stylus
+
+@var select		pattern "Pattern" {
+	"Solid": "solid",
+	"Gradiant": "gradient"
+}
+@var color		pm1 "Last Move Main" #5bb314
+@var color		pm2 "Last Move Secondary" #b0e935
+@var color		cm1 "Select Main" hsl(45, 80%, 47%)
+@var color		cm2 "Select Secondary" hsl(59, 80%, 72%)
+@var color		fm1 "Premove Main" hsl(27, 80%, 50%)
+@var color		fm2 "Premove Secondary" #edb45e
+@var range		op_out "Main Opacity" [60, 0, 100, 5, '%']
+@var range		op_in "Secondary Opacity" [35, 0, 100, 5, '%']
+
+@var range		lt_dest "Valid Move Brightness" [10, 0, 100, 5, '%']
+@var range		op_dest "Valid Move Opacity" [30, 0, 100, 5, '%']
+
+==/UserStyle== */
+@-moz-document domain("lichess.org") {
+	 
+    i       = !important
+
+	pm2_a	= alpha(pm2, op_in)
+	pm1_a	= alpha(pm1, op_out)
+	cm2_a	= alpha(cm2, op_in)
+	cm1_a	= alpha(cm1, op_out)
+	fm2_a	= alpha(fm2, op_in)
+	fm1_a	= alpha(fm1, op_out)
+	
+	dot		= radial-gradient(alpha(lightness(black, lt_dest), op_dest) 22%,
+		transparent 24%);
+	cap		= radial-gradient(transparent 52%,
+		alpha(lightness(black, lt_dest), op_dest) 54%,
+		alpha(lightness(black, lt_dest), op_dest) 69%,
+		transparent 71%);
+	
+	test = radial-gradient(red 0%, blue 100%)
+
+	square.last-move {
+		will-change transform
+		background radial-gradient(pm2_a 0%,
+		pm1_a 75%) i	
+	}
+	square.move-dest {
+		background dot i
+		pointer-events auto i
+	}
+	square.premove-dest {
+		background dot i
+		pointer-events auto
+	}
+	square.oc.move-dest {
+		background cap i
+		pointer-events auto i
+	}
+	square.oc.premove-dest {
+		background cap i
+		pointer-events auto i
+	}
+	square.selected {
+		background radial-gradient(cm2_a 0%,
+		cm1_a 75%) i
+	}
+	square.current-premove {
+		background radial-gradient(fm2_a 0%,
+		fm1_a 75%) i
+	}
+	square.oc.current-premove {
+		background cap,
+		radial-gradient(fm2_a 0%,
+		fm1_a 75%) i
+	}
+	square.move-dest:hover {
+		background dot,
+		radial-gradient(cm2_a 0%,
+		cm1_a 80%) i
+	}
+	square.oc.move-dest:hover {
+		background cap ,
+		radial-gradient(cm2_a 20%,
+		cm1_a 100%) i
+	}
+	square.premove-dest:hover {
+		background dot,
+		radial-gradient(fm2_a 20%,
+		fm1_a 100%) i
+	}
+	square.oc.premove-dest:hover {
+		background cap,
+		radial-gradient(fm2_a 20%,
+		fm1_a 100%) i
+	}
+}
