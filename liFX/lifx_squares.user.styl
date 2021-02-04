@@ -1,30 +1,31 @@
 /* ==UserStyle==
-@name           liFX - Squares (Work in Progress)
+@name           liFX - Squares (WIP COMP)
 @namespace      https://github.com/Joltya/
-@version        1.0.1
+@version        1.0.2
 @description    Custom effects for lichess.org
 @author         Kai Webb <cindykaiwebb@gmail.com>
 @homepageURL	https://github.com/Joltya/lichess/
 @supportURL		https://github.com/Joltya/lichess/liFX/issues/new/choose
 @updateURL		https://raw.githubusercontent.com/Joltya/lichess/master/liFX/lifx_squares.user.css
+@preprocessor	stylus
 @license		MIT
 
 @preprocessor	stylus
 
-@var select		pattern "Pattern" {
+@var select		style "Style" {
 	"Solid": "solid",
-	"Gradiant": "gradient"
+	"Gradiant (+)": "gradient"
 }
 @var color		pm1 "Last Move Main" #5bb314
 @var color		pm2 "Last Move Secondary" #b0e935
-@var color		cm1 "Select Main" hsl(45, 80%, 47%)
-@var color		cm2 "Select Secondary" hsl(59, 80%, 72%)
-@var color		fm1 "Premove Main" hsl(27, 80%, 50%)
+@var color		cm1 "Select Main" #d8a818
+@var color		cm2 "Select Secondary" #f1ef7e
+@var color		fm1 "Premove Main" #e6751a
 @var color		fm2 "Premove Secondary" #edb45e
-@var range		op_out "Main Opacity" [60, 0, 100, 5, '%']
-@var range		op_in "Secondary Opacity" [35, 0, 100, 5, '%']
+@var range		op_1 "Main Opacity" [60, 0, 100, 5, '%']
+@var range		op_2 "Secondary Opacity" [35, 0, 100, 5, '%']
 
-@var range		lt_dest "Valid Move Brightness" [10, 0, 100, 5, '%']
+@var range		lt_dest "Valid Move Value" [10, 0, 100, 5, '%']
 @var range		op_dest "Valid Move Opacity" [30, 0, 100, 5, '%']
 
 ==/UserStyle== */
@@ -32,26 +33,29 @@
 	 
     i       = !important
 
-	pm2_a	= alpha(pm2, op_in)
-	pm1_a	= alpha(pm1, op_out)
-	cm2_a	= alpha(cm2, op_in)
-	cm1_a	= alpha(cm1, op_out)
-	fm2_a	= alpha(fm2, op_in)
-	fm1_a	= alpha(fm1, op_out)
+	pm2_a	= alpha(pm2, op_2)
+	pm1_a	= alpha(pm1, op_1)
+	cm2_a	= alpha(cm2, op_2)
+	cm1_a	= alpha(cm1, op_1)
+	fm2_a	= alpha(fm2, op_2)
+	fm1_a	= alpha(fm1, op_1)
 	
 	dot		= radial-gradient(alpha(lightness(black, lt_dest), op_dest) 22%,
-		transparent 24%);
+		transparent 24%)
 	cap		= radial-gradient(transparent 52%,
 		alpha(lightness(black, lt_dest), op_dest) 54%,
 		alpha(lightness(black, lt_dest), op_dest) 69%,
-		transparent 71%);
+		transparent 71%)
 	
-	test = radial-gradient(red 0%, blue 100%)
-
 	square.last-move {
 		will-change transform
-		background radial-gradient(pm2_a 0%,
-		pm1_a 75%) i	
+		if style=='solid' {
+			background-color pm1_a i
+		}		
+		else if style=='gradient' {
+			background radial-gradient(pm2_a 0%,
+			pm1_a 75%) i	
+		}
 	}
 	square.move-dest {
 		background dot i
@@ -70,36 +74,64 @@
 		pointer-events auto i
 	}
 	square.selected {
-		background radial-gradient(cm2_a 0%,
-		cm1_a 75%) i
+		if style=='solid' {
+			background-color cm1_a
+		}
+		else if style=='gradient' {
+			background radial-gradient(cm2_a 0%,
+			cm1_a 80%) i
+		}
 	}
 	square.current-premove {
-		background radial-gradient(fm2_a 0%,
-		fm1_a 75%) i
+		if style=='solid' {
+			background-color fm1_a
+		}
+		else if style=='gradient' {
+		radial-gradient(fm2_a 0%,
+		fm1_a 80% ) 
+		}
 	}
 	square.oc.current-premove {
-		background cap,
-		radial-gradient(fm2_a 0%,
-		fm1_a 75%) i
+		if style=='solid' {
+			background-color fm1_a
+		}
+		else if style=='gradient' {
+			background cap,
+			radial-gradient(fm2_a 0%,
+			fm1_a 80%) i
+		}
 	}
 	square.move-dest:hover {
-		background dot,
-		radial-gradient(cm2_a 0%,
-		cm1_a 80%) i
+		if style=='solid' {
+			background dot i
+			background-color cm2_a i
+		}
+		else if style=='gradient' {
+			background dot,
+			radial-gradient(cm2_a 0%,
+			cm1_a 80%) i
+		}
 	}
 	square.oc.move-dest:hover {
-		background cap ,
-		radial-gradient(cm2_a 20%,
-		cm1_a 100%) i
+		background cap i
+		if style=='solid' {
+			background-color cm2_a i
+		}
+		else if style=='gradient' {
+			background cap ,
+			radial-gradient(cm2_a 20%,
+			cm1_a 100%) i
+		}
 	}
 	square.premove-dest:hover {
-		background dot,
-		radial-gradient(fm2_a 20%,
-		fm1_a 100%) i
+		background dot i
+		if style=='solid' {
+			background-color fm2_a i
+		}
+		else if style=='gradient' {
+			radial-gradient(fm2_a 0%,
+			cm1_a 80%) i
+		}
 	}
-	square.oc.premove-dest:hover {
-		background cap,
-		radial-gradient(fm2_a 20%,
-		fm1_a 100%) i
-	}
+
 }
