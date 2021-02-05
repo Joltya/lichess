@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name           liFX - Squares
 @namespace      https://github.com/Joltya/
-@version        1.0.4
+@version        1.0.5
 @description    Custom effects for lichess.org
 @author         Kai Webb <cindykaiwebb@gmail.com>
 @homepageURL	https://github.com/Joltya/lichess/
@@ -30,104 +30,104 @@
 
 ==/UserStyle== */
 @-moz-document domain("lichess.org") {
-	 
-    i       = !important
 
-	pm2_a	= alpha(pm2, op_2)
-	pm1_a	= alpha(pm1, op_1)
-	cm2_a	= alpha(cm2, op_2)
-	cm1_a	= alpha(cm1, op_1)
-	fm2_a	= alpha(fm2, op_2)
-	fm1_a	= alpha(fm1, op_1)
-	
-	dot		= radial-gradient(alpha(lightness(black, lt_dest), op_dest) 22%,
-		transparent 24%)
-	cap		= radial-gradient(transparent 52%,
-		alpha(lightness(black, lt_dest), op_dest) 54%,
-		alpha(lightness(black, lt_dest), op_dest) 69%,
-		transparent 71%)
-		
+	i=!important;
+	pm2_a=alpha(pm2, op_2);
+	pm1_a=alpha(pm1, op_1);
+	cm2_a=alpha(cm2, op_2);
+	cm1_a=alpha(cm1, op_1);
+	fm2_a=alpha(fm2, op_2);
+	fm1_a=alpha(fm1, op_1);
+
+	dot=radial-gradient(alpha(lightness(black, lt_dest), op_dest) 22%,
+	transparent 24%);
+	cap=radial-gradient(transparent 52%,
+	alpha(lightness(black, lt_dest), op_dest) 54%,
+	alpha(lightness(black, lt_dest), op_dest) 69%,
+	transparent 71%);
+
 	square.move-dest {
-		background dot i
-		pointer-events auto i
+		background: dot i;
+		pointer-events: auto i;
 	}
 	square.premove-dest {
-		background dot i
-		pointer-events auto
+		background: dot i;
+		pointer-events: auto;
 	}
 	square.oc.move-dest {
-		background cap i
-		pointer-events auto
+		background: cap i;
+		pointer-events: auto;
 	}
 	square.oc.premove-dest {
-		background cap i
-		pointer-events auto i
+		background: cap i;
+		pointer-events: auto i;
 	}
 	square.last-move {
-		will-change transform
+		will-change: transform;
 		if style=='solid' {
-			background-color pm1_a i
-		}		
+			background-color: pm1_a i
+		}
 		else if style=='gradient' {
-			background radial-gradient(pm2_a 0%,
-			pm1_a 80%) 	
+			background: radial-gradient(pm2_a 0%,
+			pm1_a 80%)
 		}
 	}
 	square.selected {
 		if style=='solid' {
-			background-color cm1_a i
+			background-color: cm1_a i
 		}
 		else if style=='gradient' {
-			background radial-gradient(cm2_a 0%,
+			background: radial-gradient(cm2_a 0%,
 			cm1_a 80%) i
 		}
 	}
 	square.current-premove {
 		if style=='solid' {
-			background-color fm1_a i
+			background-color: fm1_a i
 		}
 		else if style=='gradient' {
-			background radial-gradient(fm2_a 0%,
-			fm1_a 80% ) i
+			background: radial-gradient(fm2_a 0%,
+			fm1_a 80%) i
 		}
 	}
 	square.move-dest:hover {
 		if style=='solid' {
-			background-color alpha(cm1, op_2) i
+			background-color: alpha(cm1, op_2) i
 		}
 		else if style=='gradient' {
-			background dot,
+			background: dot,
 			radial-gradient(cm2_a 15%,
 			cm1_a 115%) i
 		}
 	}
 	square.oc.move-dest:hover {
 		if style=='solid' {
-			background-color alpha(cm1, op_2) 
+			background-color: alpha(cm1, op_2)
 		}
 		else if style=='gradient' {
-			background cap ,
+			background: cap,
 			radial-gradient(cm2_a 15%,
 			cm1_a 115%) i
 		}
 	}
 	square.premove-dest:hover {
-		background dot i
+		background: dot i;
 		if style=='solid' {
-			background-color alpha(fm1, op_2) i
+			background-color: alpha(fm1, op_2) i
 		}
 		else if style=='gradient' {
-			background dot,
+			background: dot,
 			radial-gradient(fm2_a 25%,
-			fm1_a 115%) i		}
+			fm1_a 115%) i
+		}
 	}
 	square.oc.premove-dest:hover {
 		if style=='solid' {
-			background cap i
-			background-color alpha(fm1, op_2) i
+			background: cap i;
+			background-color: alpha(fm1, op_2) i
 		}
 		else if style=='gradient' {
-			background cap,
+			background: cap,
 			radial-gradient(fm2_a 25%,
 			fm1_a 115%) i
 		}
