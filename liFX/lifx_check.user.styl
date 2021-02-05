@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name           liFX - Check
 @namespace      https://github.com/Joltya/
-@version        1.0.4
+@version        1.0.5
 @description    Custom effects for lichess.org
 @author         Kai Webb <cindykaiwebb@gmail.com>
 @homepageURL	https://github.com/Joltya/lichess/
@@ -24,7 +24,9 @@
 @var range		op_g "Glow Opacity" [35, 0, 100, 5, '%']
 ==/UserStyle== */
 @-moz-document domain("lichess.org") {
-	    i = !important
+
+	i=!important;
+
 	square.check {
 		if pattern=='solid' {
 			background: alpha(check, op_c) i
