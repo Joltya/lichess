@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name           liFX - Check
 @namespace      https://github.com/Joltya/
-@version        1.0.1
+@version        1.0.3
 @description    Custom effects for lichess.org
 @author         Kai Webb <cindykaiwebb@gmail.com>
 @homepageURL	https://github.com/Joltya/lichess/
@@ -10,18 +10,18 @@
 @license		MIT
 
 @preprocessor	stylus
-@var color		check "Color" #ec3013
-@var color		glow "Glow" #ffc252
-@var range		op_c "Color Opacity" [75, 0, 100, 5, '%']
-@var range		op_g "Glow Opacity" [35, 0, 100, 5, '%']
 @var select		pattern "Pattern" {
 	"Solid": "solid",
-	"Gradiant": "gradient",
+	"Gradient": "gradient",
 	"Circle": "circle",
 	"Cross": "cross",
 	"Bullseye": "bullseye",
 	"Blank": "blank"
 }
+@var color		check "Color" #ec3013
+@var color		glow "Glow" #ffc252
+@var range		op_c "Color Opacity" [75, 0, 100, 5, '%']
+@var range		op_g "Glow Opacity" [35, 0, 100, 5, '%']
 ==/UserStyle== */
 @-moz-document domain("lichess.org") {
 
@@ -33,13 +33,13 @@
 		}
 		else if pattern=='gradient' {
 			background radial-gradient(alpha(glow, op_g) 0%,
-			alpha(check, op_c) 80%) i
+			alpha(check, op_c) 80%) 
 		}
 		else if pattern=='circle' {
 			background radial-gradient(alpha(glow, op_g) 10%,
 			transparent 70%),
 			radial-gradient(alpha(check, op_c) 69%,
-			transparent 71%) i
+			transparent 71%) 
 		}
 		else if pattern=='cross' {
 			background radial-gradient( alpha(glow, op_g) 10%,
@@ -53,7 +53,7 @@
 			transparent 40%,
 			alpha(check, op_c) 42%,
 			alpha(check, op_c) 58%,
-			transparent 60%) i
+			transparent 60%) 
 		}
 		else if pattern=='bullseye' {
 			background radial-gradient(alpha(glow, op_g) 10%,
@@ -65,7 +65,7 @@
 			alpha(check, op_c) 69%,
 			transparent 71%,
 			transparent 84%,
-			alpha(check, op_c) 86%) i
+			alpha(check, op_c) 86%) 
 		}
 		else if pattern=='blank' {
 			background transparent
