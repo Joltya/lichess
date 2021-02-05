@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name           liFX - Arrows
 @namespace      https://github.com/Joltya/
-@version        1.0.1
+@version        1.0.2
 @description    Custom effects for lichess.org
 @author         Kai Webb <cindykaiwebb@gmail.com>
 @homepageURL	https://github.com/Joltya/lichess/liFX
@@ -11,74 +11,72 @@
 
 @preprocessor	stylus
 
-@var color		r_arrow "Default Arrow" hsl(124, 79%, 25%)
-@var color		r_circle "Default Circle" #33ac1b
-@var color		ar_arrow "Alt Arrow" rgb(4, 40, 108)
-@var color		ar_circle "Alt Circle" #0e56dd
-@var color		scr_arrow "Shift/Ctrl Arrow" #a01d08
-@var color		scr_circle "Shift/Ctrl Circle" #e6351a
-@var color		scar_arrow "Shift/Ctrl+Alt Arrow" #d57b07
-@var color		scar_circle "Shift/Ctrl+Alt Circle" #f0a428
+@var color		r_arrow "Default Arrow" #16720d
+@var color		r_circle "Default Circle" #025508
+@var color		ar_arrow "Alt Arrow" #0547c4
+@var color		ar_circle "Alt Circle" #093586
+@var color		scr_arrow "Shift/Ctrl Arrow" hsl(5, 91%, 47%)
+@var color		scr_circle "Shift/Ctrl Circle" #c21300
+@var color		scar_arrow "Shift/Ctrl+Alt Arrow" #f9a12f
+@var color		scar_circle "Shift/Ctrl+Alt Circle" hsl(37, 93%, 46%)
 @var range		op_master "Master Opacity" [75, 0, 100, 5, '%']
-@var range		op_circle "Fill Opacity" [30, 0, 100, 5, '%']
+@var range		op_circle "Fill Opacity" [35, 0, 100, 5, '%']
 @var range		tk_circle "Circle Thickness" [1.0, .5, 2, .1, '%']
 
 ==/UserStyle== */
 @-moz-document domain("lichess.org") {
 
-    i       = !important
-	
+	i=!important;
+
 	.cg-wrap svg {
-		opacity op_master
+		opacity: op_master;
 	}
-	
 	circle[stroke="#15781B"] {
-		stroke r_circle i
-		stroke-width tk_circle i
-		fill r_circle i
-		fill-opacity op_circle i
+		stroke: r_circle i;
+		stroke-width: tk_circle i;
+		fill: r_circle i;
+		fill-opacity: op_circle i;
 	}
 	line[stroke="#15781B"] {
-		stroke r_arrow i
+		stroke: r_arrow i;
 	}
 	path[fill="#15781B"] {
-		fill r_arrow
+		fill: r_arrow;
 	}
 	circle[stroke="#003088"] {
-		stroke ar_circle i
-		stroke-width tk_circle
-		fill ar_circle
-		fill-opacity op_circle
+		stroke: ar_circle i;
+		stroke-width: tk_circle;
+		fill: ar_circle;
+		fill-opacity: op_circle;
 	}
 	line[stroke="#003088"] {
-		stroke ar_arrow i
+		stroke: ar_arrow i;
 	}
 	path[fill="#003088"] {
-    	fill: ar_arrow i
+		fill: ar_arrow i;
 	}
 	circle[stroke="#882020"] {
-		stroke scr_circle i
-		stroke-width tk_circle i
-		fill scr_circle i
-		fill-opacity op_circle i
+		stroke: scr_circle i;
+		stroke-width: tk_circle i;
+		fill: scr_circle i;
+		fill-opacity: op_circle i;
 	}
 	line[stroke="#882020"] {
-		stroke scr_arrow i
+		stroke: scr_arrow i;
 	}
 	path[fill="#882020"] {
-    	fill: scr_arrow i
+		fill: scr_arrow i;
 	}
 	circle[stroke="#e68f00"] {
-		stroke scar_circle i
-		stroke-width tk_circle i
-		fill scar_circle i
-		fill-opacity op_circle i
+		stroke: scar_circle i;
+		stroke-width: tk_circle i;
+		fill: scar_circle i;
+		fill-opacity: op_circle i;
 	}
 	line[stroke="#e68f00"] {
-		stroke scar_arrow i
+		stroke: scar_arrow i;
 	}
 	path[fill="#e68f00"] {
-    	fill: scar_arrow i
+		fill: scar_arrow i;
 	}
-	
 }
