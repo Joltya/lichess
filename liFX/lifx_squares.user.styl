@@ -1,84 +1,135 @@
 /* ==UserStyle==
-@name           liFX - Arrows
+@name           liFX - Squares
 @namespace      https://github.com/Joltya/
-@version        1.0.3
+@version        1.0.4
 @description    Custom effects for lichess.org
 @author         Kai Webb <cindykaiwebb@gmail.com>
-@homepageURL	https://github.com/Joltya/lichess/liFX
-@supportURL		https://github.com/Joltya/lichess/issues/new/choose
-@updateURL		https://raw.githubusercontent.com/Joltya/lichess/master/liFX/lifx_arrows.user.styl
+@homepageURL	https://github.com/Joltya/lichess/
+@supportURL		https://github.com/Joltya/lichess/liFX/issues/new/choose
+@updateURL		https://raw.githubusercontent.com/Joltya/lichess/master/liFX/lifx_squares.user.css
+@preprocessor	stylus
 @license		MIT
 
 @preprocessor	stylus
 
-@var color		r_arrow "Default Arrow" #16720d
-@var color		r_circle "Default Circle" #025508
-@var color		ar_arrow "Alt Arrow" #0547c4
-@var color		ar_circle "Alt Circle" #093586
-@var color		scr_arrow "Shift/Ctrl Arrow" hsl(5, 91%, 47%)
-@var color		scr_circle "Shift/Ctrl Circle" #c21300
-@var color		scar_arrow "Shift/Ctrl+Alt Arrow" #f9a12f
-@var color		scar_circle "Shift/Ctrl+Alt Circle" hsl(37, 93%, 46%)
-@var range		op_master "Master Opacity" [75, 0, 100, 5, '%']
-@var range		op_circle "Fill Opacity" [35, 0, 100, 5, '%']
-@var range		tk_circle "Circle Thickness" [1.0, .5, 2, .1, '%']
+@var select		style "Style" {
+	"Solid": "solid",
+	"Gradient": "gradient"
+}
+@var color		pm1 "Last Move Main" #5bb314
+@var color		pm2 "Last Move Secondary" #bbec51
+@var color		cm1 "Select Main" #d8a818
+@var color		cm2 "Select Secondary" #f1ef7e
+@var color		fm1 "Premove Main" #e66f1a
+@var color		fm2 "Premove Secondary" hsl(40, 80%, 65%)
+@var range		op_1 "Main Opacity" [60, 0, 100, 5, '%']
+@var range		op_2 "Secondary Opacity" [35, 0, 100, 5, '%']
+
+@var range		lt_dest "Valid Move Value" [10, 0, 100, 5, '%']
+@var range		op_dest "Valid Move Opacity" [30, 0, 100, 5, '%']
 
 ==/UserStyle== */
 @-moz-document domain("lichess.org") {
-
+	 
     i       = !important
+
+	pm2_a	= alpha(pm2, op_2)
+	pm1_a	= alpha(pm1, op_1)
+	cm2_a	= alpha(cm2, op_2)
+	cm1_a	= alpha(cm1, op_1)
+	fm2_a	= alpha(fm2, op_2)
+	fm1_a	= alpha(fm1, op_1)
 	
-	.cg-wrap svg {
-		opacity op_master
+	dot		= radial-gradient(alpha(lightness(black, lt_dest), op_dest) 22%,
+		transparent 24%)
+	cap		= radial-gradient(transparent 52%,
+		alpha(lightness(black, lt_dest), op_dest) 54%,
+		alpha(lightness(black, lt_dest), op_dest) 69%,
+		transparent 71%)
+		
+	square.move-dest {
+		background dot i
+		pointer-events auto i
 	}
-	
-	circle[stroke="#15781B"] {
-		stroke r_circle i
-		stroke-width tk_circle i
-		fill r_circle i
-		fill-opacity op_circle i
+	square.premove-dest {
+		background dot i
+		pointer-events auto
 	}
-	line[stroke="#15781B"] {
-		stroke r_arrow i
+	square.oc.move-dest {
+		background cap i
+		pointer-events auto
 	}
-	path[fill="#15781B"] {
-		fill r_arrow
+	square.oc.premove-dest {
+		background cap i
+		pointer-events auto i
 	}
-	circle[stroke="#003088"] {
-		stroke ar_circle i
-		stroke-width tk_circle
-		fill ar_circle
-		fill-opacity op_circle
+	square.last-move {
+		will-change transform
+		if style=='solid' {
+			background-color pm1_a i
+		}		
+		else if style=='gradient' {
+			background radial-gradient(pm2_a 0%,
+			pm1_a 80%) 	
+		}
 	}
-	line[stroke="#003088"] {
-		stroke ar_arrow i
+	square.selected {
+		if style=='solid' {
+			background-color cm1_a i
+		}
+		else if style=='gradient' {
+			background radial-gradient(cm2_a 0%,
+			cm1_a 80%) i
+		}
 	}
-	path[fill="#003088"] {
-    	fill: ar_arrow i
+	square.current-premove {
+		if style=='solid' {
+			background-color fm1_a i
+		}
+		else if style=='gradient' {
+			background radial-gradient(fm2_a 0%,
+			fm1_a 80% ) i
+		}
 	}
-	circle[stroke="#882020"] {
-		stroke scr_circle i
-		stroke-width tk_circle i
-		fill scr_circle i
-		fill-opacity op_circle i
+	square.move-dest:hover {
+		if style=='solid' {
+			background-color alpha(cm1, op_2) i
+		}
+		else if style=='gradient' {
+			background dot,
+			radial-gradient(cm2_a 15%,
+			cm1_a 115%) i
+		}
 	}
-	line[stroke="#882020"] {
-		stroke scr_arrow i
+	square.oc.move-dest:hover {
+		if style=='solid' {
+			background-color alpha(cm1, op_2) 
+		}
+		else if style=='gradient' {
+			background cap ,
+			radial-gradient(cm2_a 15%,
+			cm1_a 115%) i
+		}
 	}
-	path[fill="#882020"] {
-    	fill: scr_arrow i
+	square.premove-dest:hover {
+		background dot i
+		if style=='solid' {
+			background-color alpha(fm1, op_2) i
+		}
+		else if style=='gradient' {
+			background dot,
+			radial-gradient(fm2_a 25%,
+			fm1_a 115%) i		}
 	}
-	circle[stroke="#e68f00"] {
-		stroke scar_circle i
-		stroke-width tk_circle i
-		fill scar_circle i
-		fill-opacity op_circle i
+	square.oc.premove-dest:hover {
+		if style=='solid' {
+			background cap i
+			background-color alpha(fm1, op_2) i
+		}
+		else if style=='gradient' {
+			background cap,
+			radial-gradient(fm2_a 25%,
+			fm1_a 115%) i
+		}
 	}
-	line[stroke="#e68f00"] {
-		stroke scar_arrow i
-	}
-	path[fill="#e68f00"] {
-    	fill: scar_arrow i
-	}
-	
 }
