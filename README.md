@@ -1,2 +1,3 @@
-# lichess
-Userstyles and 
+# > lichess.org / LiFX
+Custom user styles for lichess.org
+
